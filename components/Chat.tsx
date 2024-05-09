@@ -8,10 +8,9 @@ type Who = {
     text: string
 }
 
-function Chat({ }: Props) {
+function Chat({ messages, setMessages }: any) {
 
     const [inputMessage, setInputMessage] = useState<string>('');
-    const [messages, setMessages] = useState<Who[]>([]);
     const [isLoading, setLoading] = useState<boolean>(false)
 
     const handleSubmit = async () => {
