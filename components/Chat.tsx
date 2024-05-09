@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState, KeyboardEvent } from 'react'
+import React, { useEffect, useState, KeyboardEvent, useRef } from 'react'
 import Notification from './Notification';
 type Props = {}
 
@@ -12,18 +12,29 @@ function Chat({ messages, setMessages }: any) {
 
     const [inputMessage, setInputMessage] = useState<string>('');
     const [isLoading, setLoading] = useState<boolean>(false)
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const scrollToBottom = () => {
+        const diva = scrollRef.current;
+        //@ts-ignore
+        diva.scrollTop = diva.scrollHeight + 340;
+        // scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
     const handleSubmit = async () => {
         setLoading(true);
+        //@ts-ignore
         setMessages(current => [...current, { who: 'client', text: inputMessage }])
         let response = await fetch('http://localhost:11434/api/generate', { method: 'POST', body: JSON.stringify({ model: 'gemma:2b', prompt: inputMessage, stream: false }) })
         let parsed = await response.json();
         setInputMessage('');
+        //@ts-ignore
         setMessages(current => [...current, { who: 'server', text: parsed.response }])
         setLoading(false);
+        scrollToBottom()
     }
 
     const test = () => {
+        //@ts-ignore
         setMessages(current => [...current, { who: 'server', text: inputMessage }])
     }
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -35,7 +46,8 @@ function Chat({ messages, setMessages }: any) {
     return (
         <div className='w-full bg-primary lg:ml-[20px] ml-0 rounded-xl hh my-[48px] relative px-[20px] overflow-x-hidden'>
             {isLoading && <Notification />}
-            <div className='w-full hh absolute bottom-0 justify-between pb-[100px] pr-10 overflow-y-scroll sh'>
+            <div ref={scrollRef} className='w-full absolute bottom-0 justify-between pb-[100px] pr-10 overflow-y-scroll sh'>
+                {/* @ts-ignore */}
                 {messages?.map((item) => (
                     <div className={item.who == 'server' ? 'w-full flex flex-col items-start' : 'w-full flex flex-col  items-end'}>
                         <div className='text-text bg-box p-4 rounded-lg my-2 w-6/12 float-right'>
