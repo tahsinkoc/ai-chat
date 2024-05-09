@@ -2,7 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+
+.hh {
+  height: calc(100vh - 100px);
+}
+
+.wc {
+  width: calc(100% - 20px) !important;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #222222;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+.sh::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -30,4 +65,4 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-}
+} */
