@@ -24,7 +24,7 @@ function Chat({ messages, setMessages }: any) {
         setLoading(true);
         //@ts-ignore
         setMessages(current => [...current, { who: 'client', text: inputMessage }])
-        let response = await fetch('http://localhost:11434/api/generate', { method: 'POST', body: JSON.stringify({ model: 'gemma:2b', prompt: inputMessage, stream: false }) })
+        let response = await fetch('https://dgtalhat.com/gemma/api/generate', { method: 'POST', body: JSON.stringify({ model: 'gemma:2b', prompt: inputMessage, stream: false }) })
         let parsed = await response.json();
         setInputMessage('');
         //@ts-ignore
