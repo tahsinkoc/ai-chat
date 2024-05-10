@@ -46,11 +46,11 @@ function Chat({ messages, setMessages }: any) {
     return (
         <div className='w-full bg-primary lg:ml-[20px] ml-0 rounded-xl hh my-[48px] relative px-[20px] overflow-x-hidden'>
             {isLoading && <Notification />}
-            <div ref={scrollRef} className='w-full absolute bottom-0 justify-between pb-[100px] pr-10 overflow-y-scroll sh'>
+            <div ref={scrollRef} className='w-full absolute bottom-0 justify-between pb-[100px] pr-10 overflow-y-scroll h-full sh'>
                 {/* @ts-ignore */}
                 {messages?.map((item) => (
                     <div className={item.who == 'server' ? 'w-full flex flex-col items-start' : 'w-full flex flex-col  items-end'}>
-                        <div className='text-text bg-box p-4 rounded-lg my-2 w-6/12 float-right'>
+                        <div className={item.who == 'server' ? 'text-text bg-box p-4 rounded-lg my-2 lg:w-6/12 w-full float-right' : 'text-text lg:bg-box bg-[#36363a] p-4 rounded-lg my-2 lg:w-6/12 w-full float-right'}>
                             {item.text}
                         </div>
                     </div>

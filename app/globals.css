@@ -4,7 +4,17 @@
 
 
 .hh {
-  height: calc(100vh - 100px);
+  height: 100vh;
+}
+
+.shh {
+  box-shadow: 0 0 20px 0 #0000005e;
+}
+
+@media (min-width: 1024px) {
+  .hh {
+    height: calc(100vh - 100px);
+  }
 }
 
 .wc {
