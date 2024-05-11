@@ -14,7 +14,8 @@ const config: Config = {
         primary: '#121214',
         input: '#1D1D1F',
         box: '#020203',
-        text: 'rgba(255,255,255,0.5)'
+        text: 'rgba(255,255,255,0.5)',
+        hovercl: '#36363a'
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
