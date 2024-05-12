@@ -19,4 +19,5 @@ Once you have completed all these steps, you can launch the interface and start 
 I'd like to mention that I'll continue developing this project. Additionally, it will be made compatible with other ollama models. Users will be able to select the loaded model via the sidebar and engage in conversation based on the chosen model. This will allow users to interact with their preferred model and experience a broader range of capabilities.
 
 ---
+<img src='public/sss.png'/>
 <img src='public/ss.png'/>
