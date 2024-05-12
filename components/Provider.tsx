@@ -15,6 +15,8 @@ export default function Provider() {
     const [isOpen, setOpen] = useState<boolean>(false);
     const [loader, setLoader] = useState<boolean>(true);
     const [loaderMessage, setLoaderMessage] = useState('Just a sec, We checking ollama is installed on your computer or not.');
+    const [model, setModel] = useState<string>('gemma:2b');
+    const [update, setUpdate] = useState<boolean>(false);
 
     useEffect(() => {
         fetch('/api/check')
@@ -62,7 +64,7 @@ export default function Provider() {
                 </div>
             }
             <div className={isOpen ? "left-0 lg:relative fixed z-50 h-screen top-0 shh transition-all duration-500" : "shh left-[-100%] top-0 lg:left-0 lg:relative h-screen fixed z-50 transition-all duration-500"}>
-                <Bar messages={messages} setMessages={setMessages} isOpen={isOpen} setOpen={setOpen} />
+                <Bar update={update} setUpdate={setUpdate} messages={messages} setMessages={setMessages} setModel={setModel} isOpen={isOpen} setOpen={setOpen} />
             </div>
             <div className="w-full">
                 <div className="w-full lg:hidden flex justify-between items-center bg-primary text-text py-2 px-4 rounded-lg">
@@ -73,7 +75,7 @@ export default function Provider() {
                     </button>
                     <Image src={'/ailogo.png'} alt="logo" width={70} height={70} />
                 </div>
-                <Chat messages={messages} setMessages={setMessages} />
+                <Chat messages={messages} setMessages={setMessages} setModel={setModel} model={model} update={update} />
             </div>
         </div>
     );

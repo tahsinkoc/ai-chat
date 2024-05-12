@@ -8,7 +8,7 @@ type Who = {
     text: string
 }
 
-function Chat({ messages, setMessages }: any) {
+function Chat({ messages, setMessages, model }: any) {
 
     const [inputMessage, setInputMessage] = useState<string>('');
     const [isLoading, setLoading] = useState<boolean>(false)
@@ -24,7 +24,7 @@ function Chat({ messages, setMessages }: any) {
         setLoading(true);
         //@ts-ignore
         setMessages(current => [...current, { who: 'client', text: inputMessage }])
-        let response = await fetch('http://localhost:11434/api/generate', { method: 'POST', body: JSON.stringify({ model: 'gemma:2b', prompt: inputMessage, stream: false }) })
+        let response = await fetch('http://localhost:11434/api/generate', { method: 'POST', body: JSON.stringify({ model: model, prompt: inputMessage, stream: false }) })
         let parsed = await response.json();
         setInputMessage('');
         //@ts-ignore

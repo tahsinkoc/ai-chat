@@ -3,6 +3,46 @@
 @tailwind utilities;
 
 
+
+
+
+
+.sca {
+  animation: scalimate .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.opan {
+  animation: opanimate .3s;
+}
+
+.opani {
+  animation: opanimate .3s reverse;
+}
+
+@keyframes opanimate {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scalimate {
+  from {
+    scale: 0;
+  }
+
+  to {
+    scale: 1;
+  }
+}
+
+.hhs {
+  height: calc(100% - 270px);
+}
+
 .hh {
   height: 100vh;
 }
