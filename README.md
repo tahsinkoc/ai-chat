@@ -4,7 +4,9 @@
 This project is an AI-powered chat interface developed using Next.js and Tailwind CSS. It allows users to interact with an artificial intelligence model similar to ChatGPT, generating responses based on user input. However, to utilize the AI model, you need access to the [Ollama](https://ollama.com/) platform, which includes the Gemma:2b model.
 
 ---
-Greetings now when you download and run this project it will automaticly  check Ollama's existence, Ollama's status (is running or not), Gemma:2b model's existence and it will guide you to follow the instructions to start chatting.
+Greetings, this project is now dynamically compatible with all of Ollama's text models. The sidebar has been updated, allowing you to add your models and easily switch between your downloaded models.
+
+When you download and run this project it will automaticly  check Ollama's existence, Ollama's status (is running or not), Gemma:2b model's existence and it will guide you to follow the instructions to start chatting.
 
 ---
 
