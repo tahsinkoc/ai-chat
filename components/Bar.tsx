@@ -13,7 +13,7 @@ function Bar({ messages, setMessages, setOpen, isOpen, setUpdate, update, setMod
     const handleClick = (item: object, index: number,) => {
         setClicked(index);
         // @ts-ignore
-        setModel(item.modelName);
+        setModel(item);
     }
 
     const handleDelete = (index: number) => {
