@@ -13,8 +13,9 @@ function Chat({ messages, setMessages, model }: any) {
     const fileRef = useRef(null);
 
     const [inputMessage, setInputMessage] = useState<string>('');
-    const [image, setImage] = useState(null);
-    const [file, setFile] = useState('');
+    const [image, setImage] = useState('');
+    const [file, setFile] = useState(null);
+    const [imageShow, setShow] = useState('');
     const [isLoading, setLoading] = useState<boolean>(false)
     const scrollRef = useRef<HTMLDivElement>(null);
     const scrollToBottom = () => {
@@ -27,13 +28,13 @@ function Chat({ messages, setMessages, model }: any) {
     const handleSubmit = async () => {
         setLoading(true);
         //@ts-ignore
-        setMessages(current => [...current, { who: 'client', text: inputMessage }])
+        setMessages(current => [...current, { who: 'client', text: inputMessage, image: imageShow }])
         if (image) {
             console.log(image);
             let response = await fetch('http://localhost:11434/api/generate', {
                 method: 'POST',
                 body: JSON.stringify({
-                    model: model.model,
+                    model: model.modelName,
                     prompt: inputMessage,
                     stream: false,
                     images: [image]
@@ -41,19 +42,28 @@ function Chat({ messages, setMessages, model }: any) {
             })
             let parsed = await response.json();
             //@ts-ignore
-            setMessages(current => [...current, { who: 'server', text: parsed.response }])
+            setMessages(current => [...current, { who: 'server', text: parsed.response, image: imageShow }])
+            setFile(null);
+            //@ts-ignore
+            setShow('');
+            setImage(null);
         } else {
+            console.log(model);
             let response = await fetch('http://localhost:11434/api/generate', {
                 method: 'POST',
                 body: JSON.stringify({
-                    model: model.model,
+                    model: model.modelName,
                     prompt: inputMessage,
                     stream: false
                 })
             })
             let parsed = await response.json();
             //@ts-ignore
-            setMessages(current => [...current, { who: 'server', text: parsed.response }])
+            setMessages(current => [...current, { who: 'server', text: parsed.response, image: imageShow }])
+            setFile(null);
+            //@ts-ignore
+            setShow('');
+            setImage(null);
         }
 
         setInputMessage('');
@@ -61,6 +71,7 @@ function Chat({ messages, setMessages, model }: any) {
         setLoading(false);
         scrollToBottom()
     }
+
 
     const handleFileChange = (e: any) => {
         const selectedFile = e.target.files[0];
@@ -70,11 +81,16 @@ function Chat({ messages, setMessages, model }: any) {
         const reader = new FileReader();
         reader.readAsDataURL(selectedFile);
         reader.onload = () => {
-            const base64Data = reader.result?.toString(); // data:image/png;base64, kısmını kaldır
             // @ts-ignore
-            setImage(base64Data);
-            console.log(base64Data);
+            const base64String = reader.result.split(',')[1]; // Data URL'den base64 kısmını alır
+            // @ts-ignore
+            setShow(reader.result);
+            setImage(base64String);
         };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
 
     };
 
@@ -96,6 +112,11 @@ function Chat({ messages, setMessages, model }: any) {
                 {messages?.map((item) => (
                     <div className={item.who == 'server' ? 'w-full flex flex-col items-start' : 'w-full flex flex-col  items-end'}>
                         <div className={item.who == 'server' ? 'text-text bg-box p-4 rounded-lg my-2 lg:w-6/12 w-full float-right' : 'text-text lg:bg-box bg-[#36363a] p-4 rounded-lg my-2 lg:w-6/12 w-full float-right'}>
+                            {
+                                item.image ? <div className='w-full mb-4 border-b-2 border-text pb-4'>
+                                    <img src={item.image} className='w-3/12' alt="content" />
+                                </div> : <></>
+                            }
                             {item.text}
                         </div>
                     </div>
