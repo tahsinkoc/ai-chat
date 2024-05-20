@@ -10,14 +10,16 @@ type Props = {
 
 type aiModel = {
     displayName: string,
-    modelName: string
+    modelName: string,
+    includesImage: boolean
 }
 
 function Popup({ isOpen, setOpen, setUpdate, update }: Props) {
 
     const [modelForPush, setModelForPush] = useState<aiModel>({
         displayName: '',
-        modelName: ''
+        modelName: '',
+        includesImage: false
     })
 
     const handleModels = () => {
@@ -40,10 +42,10 @@ function Popup({ isOpen, setOpen, setUpdate, update }: Props) {
     }
 
     const handleInput = (e: any) => {
-        const { name, value } = e.target;
+        const { name, value, checked } = e.target;
         setModelForPush(current => ({
             ...current,
-            [name]: value
+            [name]: name === 'includesImage' ? checked : value
         }))
     }
 
@@ -64,6 +66,10 @@ function Popup({ isOpen, setOpen, setUpdate, update }: Props) {
                 </div>
                 <input onChange={handleInput} name='displayName' type="text" className='text-text bg-input wc border-none outline-none rounded-xl p-4 focus:bg-hovercl my-2' placeholder='Display name' />
                 <input onChange={handleInput} name='modelName' type="text" className='text-text bg-input wc border-none outline-none rounded-xl p-4 focus:bg-hovercl my-2' placeholder='Model name ex. gemma:2b' />
+                <div className='flex items-center justify-start text-text w-full px-4'>
+                    <label htmlFor="">Is model includes image</label>
+                    <input onChange={handleInput} name='includesImage' type="checkbox" className='w-5 h-5 ml-2' />
+                </div>
                 <button onClick={handleModels} className='text-white bg-hovercl my-2 hover:bg-hovercl wc py-2 text-center rounded-xl'>
                     Add
                 </button>

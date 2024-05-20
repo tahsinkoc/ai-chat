@@ -15,7 +15,10 @@ export default function Provider() {
     const [isOpen, setOpen] = useState<boolean>(false);
     const [loader, setLoader] = useState<boolean>(true);
     const [loaderMessage, setLoaderMessage] = useState('Just a sec, We checking ollama is installed on your computer or not.');
-    const [model, setModel] = useState<string>('gemma:2b');
+    const [model, setModel] = useState<object>({
+        model: 'gemma:2b',
+        includesImage: false
+    });
     const [update, setUpdate] = useState<boolean>(false);
 
     useEffect(() => {
@@ -24,21 +27,19 @@ export default function Provider() {
             .then(res => {
                 if (res.message) {
                     setLoaderMessage('Great, it looks like there is ollama in your computer, one more sec we are checking for a model')
-                    setTimeout(() => {
-                        let a = Date.now().toString();
-                        fetch('/api/checkm/')
-                            .then(res => res.json())
-                            .then(res => {
-                                if (res.message === true) {
-                                    setLoaderMessage('Great, you have everything. Redirecting....')
-                                    setTimeout(() => {
-                                        setLoader(false)
-                                    }, 2000);
-                                } else {
-                                    router.push('/model')
-                                }
-                            })
-                    }, 2000);
+                    let a = Date.now().toString();
+                    fetch('/api/checkm/')
+                        .then(res => res.json())
+                        .then(res => {
+                            if (res.message === true) {
+                                setLoaderMessage('Great, you have everything. Redirecting....')
+                                setTimeout(() => {
+                                    setLoader(false)
+                                }, 2000);
+                            } else {
+                                router.push('/model')
+                            }
+                        })
                 } else {
                     router.push('/download')
                 }
