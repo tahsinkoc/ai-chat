@@ -1,7 +1,7 @@
 <h2>AI Chat Interface with Next.js and Tailwind CSS</h2>
 <img src='public/ailogo.png' width='150px'/>
 
-This project is an AI-powered chat interface developed using Next.js and Tailwind CSS. It allows users to interact with an artificial intelligence model similar to ChatGPT, generating responses based on user input. However, to utilize the AI model, you need access to the [Ollama](https://ollama.com/) platform, which includes the Gemma:2b model.
+This project is an AI-powered chat interface developed using Next.js and Tailwind CSS. It allows users to interact with an artificial intelligence model similar to ChatGPT, generating responses based on user input. However, to utilize the AI model, you need access to the [Ollama](https://ollama.com/) platform, which includes the Gemma:2b model..
 
 ---
 Greetings, this project is now dynamically compatible with all of Ollama's text models. The sidebar has been updated, allowing you to add your models and easily switch between your downloaded models.
