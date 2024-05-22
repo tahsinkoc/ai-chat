@@ -43,10 +43,6 @@ function Chat({ messages, setMessages, model }: any) {
             let parsed = await response.json();
             //@ts-ignore
             setMessages(current => [...current, { who: 'server', text: parsed.response, image: imageShow }])
-            setFile(null);
-            //@ts-ignore
-            setShow('');
-            setImage(null);
         } else {
             console.log(model);
             let response = await fetch('http://localhost:11434/api/generate', {
@@ -60,13 +56,12 @@ function Chat({ messages, setMessages, model }: any) {
             let parsed = await response.json();
             //@ts-ignore
             setMessages(current => [...current, { who: 'server', text: parsed.response, image: imageShow }])
-            setFile(null);
-            //@ts-ignore
-            setShow('');
-            setImage(null);
         }
 
         setInputMessage('');
+        setFile(null);
+        setImage(null);
+        setShow('');
         //@ts-ignore
         setLoading(false);
         scrollToBottom()
